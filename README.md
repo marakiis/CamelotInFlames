@@ -15,3 +15,11 @@ The entire source code is available under the MIT licence
 
 # Dependencies
 The project runs in Godot 4.2
+
+# TODO
+ - Change easy mode to normal mode and normal mode to hard mode
+ - Improve platform handling
+ - Add sound cue for platform movement
+ - Add the ability for the player to crouch
+ - Improve background (paralaxed sky)
+ - Improve the flame effect (shadder)
