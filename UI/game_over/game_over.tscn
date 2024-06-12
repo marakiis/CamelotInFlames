@@ -1,0 +1,150 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq8khl1xj1ffn"]
+
+[ext_resource type="Script" path="res://UI/game_over/game_over.gd" id="1_x03u7"]
+[ext_resource type="Texture2D" uid="uid://gcb67xj5pdhc" path="res://assets/backgrounds/sky.png" id="2_4h7v0"]
+[ext_resource type="AudioStream" uid="uid://cbsrn0kbs23q2" path="res://assets/audio/game_over.mp3" id="2_lcavh"]
+[ext_resource type="FontFile" uid="uid://bukinx3k32c8" path="res://assets/UI/Deutsch.ttf" id="3_ch1pq"]
+[ext_resource type="Texture2D" uid="uid://e4fov6k1t7g" path="res://assets/backgrounds/background_gameover.png" id="3_pqo5h"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x03u7")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_lcavh")
+autoplay = true
+
+[node name="Sky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4h7v0")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pqo5h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 12
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 75
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 40
+text = "Arthur's legacy ends in the ruins of Camelot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Separator" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Separator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Separator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Separator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Scores" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Score" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scores"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 55
+text = "Score: 42"
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scores"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 40
+text = "High Score: 98765432"
+horizontal_alignment = 1
+
+[node name="HighScoreEasyMode" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scores"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 40
+text = "High Score: 98765432"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Separator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 50
+text = "Retry"
+
+[node name="ReturnToMainMenu" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ch1pq")
+theme_override_font_sizes/font_size = 50
+text = "Main Menu"
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

@@ -1,0 +1,349 @@
+[gd_scene load_steps=26 format=3 uid="uid://cag7nnc7w1cb4"]
+
+[ext_resource type="Script" path="res://UI/main_menu/main_menu.gd" id="1_lgxjj"]
+[ext_resource type="AudioStream" uid="uid://cxk3br4piu4qv" path="res://assets/audio/main_menu.mp3" id="2_hfmmu"]
+[ext_resource type="Texture2D" uid="uid://d4hrsodx7ynv0" path="res://assets/backgrounds/background_menu.png" id="2_wfqu0"]
+[ext_resource type="Texture2D" uid="uid://gcb67xj5pdhc" path="res://assets/backgrounds/sky.png" id="3_4wjy4"]
+[ext_resource type="Texture2D" uid="uid://7isigv11muqh" path="res://assets/UI/scroll.png" id="5_ufhtq"]
+[ext_resource type="Texture2D" uid="uid://dang6o2wmq0un" path="res://assets/arthur/arthur_run_0.png" id="6_gn40v"]
+[ext_resource type="FontFile" uid="uid://bukinx3k32c8" path="res://assets/UI/Deutsch.ttf" id="6_pf5nc"]
+[ext_resource type="Texture2D" uid="uid://2yrvl5q35lux" path="res://assets/arthur/arthur_run_1.png" id="7_mgnjm"]
+[ext_resource type="Texture2D" uid="uid://doeym36gsgjqs" path="res://assets/arthur/arthur_run_2.png" id="8_ll6ro"]
+[ext_resource type="Texture2D" uid="uid://b00dv5ima8548" path="res://assets/arthur/arthur_run_4.png" id="9_sfkl7"]
+[ext_resource type="Texture2D" uid="uid://dyonpirf4s8x5" path="res://assets/UI/kb_left.png" id="10_01v6f"]
+[ext_resource type="Texture2D" uid="uid://bvfe8fpmdfrvf" path="res://assets/UI/kb_a.png" id="11_66wdu"]
+[ext_resource type="Texture2D" uid="uid://d0u77n5txrlqv" path="res://assets/UI/gp_L_left.png" id="12_n0ft6"]
+[ext_resource type="Texture2D" uid="uid://r4rahfcuhbqy" path="res://assets/UI/kb_right.png" id="13_yvopx"]
+[ext_resource type="Texture2D" uid="uid://cqsr1lte5lsm0" path="res://assets/UI/kb_d.png" id="14_duk7g"]
+[ext_resource type="Texture2D" uid="uid://gd3vhba3dfer" path="res://assets/UI/gp_L_right.png" id="15_74a40"]
+[ext_resource type="Texture2D" uid="uid://blimr1515fl8n" path="res://assets/arthur/arthur_fall.png" id="16_eb7em"]
+[ext_resource type="Texture2D" uid="uid://draug05tuwccy" path="res://assets/arthur/arthur_jump.png" id="16_y6m8b"]
+[ext_resource type="Texture2D" uid="uid://bia2t3ly6qrf0" path="res://assets/UI/kb_up.png" id="17_55csv"]
+[ext_resource type="Texture2D" uid="uid://msh3qqwrjvhq" path="res://assets/UI/kb_space_1.png" id="18_ie1qr"]
+[ext_resource type="Texture2D" uid="uid://by3cnp0nagy6" path="res://assets/UI/kb_space_2.png" id="19_otwku"]
+[ext_resource type="Texture2D" uid="uid://fdabg2q0ptkp" path="res://assets/UI/kb_space_3.png" id="20_82yqy"]
+[ext_resource type="Texture2D" uid="uid://bg7uyppowr1kf" path="res://assets/UI/gp_a.png" id="21_cyour"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6p5x1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gn40v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mgnjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ll6ro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_sfkl7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5avar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_eb7em")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_y6m8b")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lgxjj")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hfmmu")
+autoplay = true
+
+[node name="Sky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4wjy4")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wfqu0")
+
+[node name="MainMenu" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Separator" type="Control" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.876497, 0.26601, 0.227861, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 12
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 100
+text = "Camelot in Flames !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Separator" type="Control" parent="MainMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MainMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 50
+text = "Play"
+
+[node name="Instructions" type="Button" parent="MainMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 50
+text = "Instructions"
+
+[node name="Quit" type="Button" parent="MainMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="CheckButton" type="CheckButton" parent="MainMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 30
+text = "Easy Mode"
+
+[node name="Instructions" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scroll" type="TextureRect" parent="Instructions"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 1268.0
+offset_bottom = 708.0
+texture = ExtResource("5_ufhtq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Instructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 150
+
+[node name="Scenario1" type="RichTextLabel" parent="Instructions/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_pf5nc")
+theme_override_font_sizes/normal_font_size = 50
+text = "A dragon attacked Camelot !
+
+He turned it into a pile of flaming 
+rubbles !!!
+
+How long will the proud King Arthur 
+stand against the vicicious beast ?"
+fit_content = true
+scroll_active = false
+
+[node name="Scenario2" type="RichTextLabel" parent="Instructions/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_pf5nc")
+theme_override_font_sizes/normal_font_size = 50
+text = "Only a single plateform stands of 
+what was once Camelot.
+
+Its magic stones move around searching
+for their place in the ruined castle.
+
+Beware not to fall while avoiding the
+dragon's attacks."
+fit_content = true
+scroll_active = false
+
+[node name="HowToPlay" type="CanvasGroup" parent="Instructions/MarginContainer"]
+
+[node name="Label" type="Label" parent="Instructions/MarginContainer/HowToPlay"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 450.0
+offset_top = 109.0
+offset_right = 798.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 70
+text = "How to Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Left" type="Node2D" parent="Instructions/MarginContainer/HowToPlay"]
+position = Vector2(350, 300)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Instructions/MarginContainer/HowToPlay/Left"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_6p5x1")
+flip_h = true
+
+[node name="KbLeft" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Left"]
+position = Vector2(0, 100)
+scale = Vector2(3, 3)
+texture = ExtResource("10_01v6f")
+
+[node name="KbA" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Left"]
+position = Vector2(0, 150)
+scale = Vector2(3, 3)
+texture = ExtResource("11_66wdu")
+
+[node name="GpLeft" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Left"]
+position = Vector2(0, 200)
+scale = Vector2(3, 3)
+texture = ExtResource("12_n0ft6")
+
+[node name="Right" type="Node2D" parent="Instructions/MarginContainer/HowToPlay"]
+position = Vector2(500, 300)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Instructions/MarginContainer/HowToPlay/Right"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_6p5x1")
+
+[node name="KbRight" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Right"]
+position = Vector2(0, 100)
+scale = Vector2(3, 3)
+texture = ExtResource("13_yvopx")
+
+[node name="KbD" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Right"]
+position = Vector2(0, 150)
+scale = Vector2(3, 3)
+texture = ExtResource("14_duk7g")
+
+[node name="GpRight" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Right"]
+position = Vector2(0, 200)
+scale = Vector2(3, 3)
+texture = ExtResource("15_74a40")
+
+[node name="Jump" type="Node2D" parent="Instructions/MarginContainer/HowToPlay"]
+position = Vector2(800, 300)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_5avar")
+animation = &"fall"
+
+[node name="Kb_Up" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump"]
+position = Vector2(0, 100)
+scale = Vector2(3, 3)
+texture = ExtResource("17_55csv")
+
+[node name="Kb_Space" type="Node2D" parent="Instructions/MarginContainer/HowToPlay/Jump"]
+position = Vector2(0, 150)
+
+[node name="Space_1" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump/Kb_Space"]
+scale = Vector2(3, 3)
+texture = ExtResource("18_ie1qr")
+
+[node name="Space_2" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump/Kb_Space"]
+position = Vector2(30, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("19_otwku")
+
+[node name="Space_3" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump/Kb_Space"]
+position = Vector2(60, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("20_82yqy")
+
+[node name="Gamepad_A" type="Sprite2D" parent="Instructions/MarginContainer/HowToPlay/Jump"]
+position = Vector2(0, 200)
+scale = Vector2(3, 3)
+texture = ExtResource("21_cyour")
+
+[node name="Next" type="Node2D" parent="Instructions/MarginContainer"]
+position = Vector2(896, 579)
+
+[node name="Next" type="Button" parent="Instructions/MarginContainer/Next"]
+offset_left = 75.0
+offset_top = -21.0
+offset_right = 132.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_pf5nc")
+theme_override_font_sizes/font_size = 30
+text = "Next"
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="pressed" from="MainMenu/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainMenu/HBoxContainer/VBoxContainer/Instructions" to="." method="_on_instructions_pressed"]
+[connection signal="pressed" from="MainMenu/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="MainMenu/HBoxContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="Instructions/MarginContainer/Next/Next" to="." method="_on_next_pressed"]

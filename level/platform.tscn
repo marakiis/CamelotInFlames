@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://cc0hunn5qp2vb"]
+
+[ext_resource type="Script" path="res://level/platform.gd" id="1_fb26x"]
+[ext_resource type="Texture2D" uid="uid://68n87dqvsx50" path="res://assets/plateform.png" id="2_ou6pf"]
+[ext_resource type="PackedScene" uid="uid://bdf4b57ka6cxf" path="res://components/plateformer/floater/floater_component.tscn" id="3_ymngv"]
+[ext_resource type="PackedScene" uid="uid://1hbny108kx7j" path="res://components/plateformer/target_selector/target_selector_component.tscn" id="4_i5gqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nltvl"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i8vf"]
+size = Vector2(150, 100)
+
+[sub_resource type="Gradient" id="Gradient_rwu4x"]
+colors = PackedColorArray(0.577567, 6.6998e-05, 0.490569, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o8h8v"]
+gradient = SubResource("Gradient_rwu4x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jheke"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(65, 15, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 7.0
+color_ramp = SubResource("GradientTexture1D_o8h8v")
+
+[node name="Platefrom" type="CharacterBody2D" node_paths=PackedStringArray("floater_component", "target_selector")]
+z_index = 10
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_fb26x")
+floater_component = NodePath("FloaterComponent")
+target_selector = NodePath("TargetSelectorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nltvl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ou6pf")
+
+[node name="NextPosition" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextPosition"]
+position = Vector2(0, -65)
+shape = SubResource("RectangleShape2D_7i8vf")
+disabled = true
+debug_color = Color(0.603922, 0.372549, 0.988235, 0.858824)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="NextPosition"]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_jheke")
+
+[node name="FloaterComponent" parent="." instance=ExtResource("3_ymngv")]
+speed = 1000.0
+
+[node name="TargetSelectorComponent" parent="." instance=ExtResource("4_i5gqv")]
+distance_max = 150.0
+position_min = Vector2(60, 150)
+position_max = Vector2(640, 680)
+
+[connection signal="body_entered" from="NextPosition" to="." method="_on_next_position_body_entered"]

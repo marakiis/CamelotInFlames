@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=3 uid="uid://d362styyfq8g7"]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_18x28"]
+[ext_resource type="AudioStream" uid="uid://705m7742we2r" path="res://assets/audio/game.mp3" id="2_1xevo"]
+[ext_resource type="Texture2D" uid="uid://gcb67xj5pdhc" path="res://assets/backgrounds/sky.png" id="2_rwgnq"]
+[ext_resource type="AudioStream" uid="uid://52wmxqrcfbci" path="res://assets/audio/intro.mp3" id="2_wxbku"]
+[ext_resource type="Texture2D" uid="uid://v7x3ehgfl4vv" path="res://assets/backgrounds/background_game.png" id="3_2kt4y"]
+[ext_resource type="FontFile" uid="uid://bukinx3k32c8" path="res://assets/UI/Deutsch.ttf" id="4_sgmba"]
+[ext_resource type="PackedScene" uid="uid://cc0hunn5qp2vb" path="res://level/platform.tscn" id="5_7yisi"]
+[ext_resource type="PackedScene" uid="uid://d177n80yabv6n" path="res://entities/arthur/arthur.tscn" id="5_nf5ex"]
+[ext_resource type="PackedScene" uid="uid://djwnv33bxfgae" path="res://entities/dragon/dragon.tscn" id="6_6b8dl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggtvt"]
+size = Vector2(1300, 60)
+
+[sub_resource type="Gradient" id="Gradient_snude"]
+colors = PackedColorArray(0.943735, 0.437459, 0, 1, 0.169245, 0.169245, 0.169245, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vhqyw"]
+gradient = SubResource("Gradient_snude")
+
+[sub_resource type="Curve" id="Curve_l451j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.127925), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_luiyu"]
+curve = SubResource("Curve_l451j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yjxrr"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(640, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -98, 0)
+scale_min = 5.0
+scale_max = 50.0
+scale_curve = SubResource("CurveTexture_luiyu")
+color_ramp = SubResource("GradientTexture1D_vhqyw")
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_18x28")
+
+[node name="Intro" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_wxbku")
+volume_db = -15.0
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_1xevo")
+volume_db = -15.0
+
+[node name="Sky" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_rwgnq")
+
+[node name="Castle" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_2kt4y")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 568.0
+offset_top = 5.0
+offset_right = 662.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("4_sgmba")
+theme_override_font_sizes/font_size = 50
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Plateform" parent="." instance=ExtResource("5_7yisi")]
+position = Vector2(237, 494)
+
+[node name="Arthur" parent="." instance=ExtResource("5_nf5ex")]
+position = Vector2(238, 407)
+
+[node name="Dragon" parent="." node_paths=PackedStringArray("arthur") instance=ExtResource("6_6b8dl")]
+position = Vector2(759, 213)
+arthur = NodePath("../Arthur")
+
+[node name="Fire" type="Area2D" parent="."]
+position = Vector2(640, 710)
+collision_layer = 8
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
+shape = SubResource("RectangleShape2D_ggtvt")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Fire"]
+z_index = 1
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_yjxrr")
+lifetime = 1.5
+
+[connection signal="dragon_fireball" from="." to="Dragon" method="_on_test_level_dragon_fireball"]
+[connection signal="platform_premove" from="." to="Plateform" method="_on_test_level_platform_premove"]
+[connection signal="finished" from="Intro" to="." method="_on_intro_finished"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="body_entered" from="Fire" to="." method="_on_area_2d_body_entered"]

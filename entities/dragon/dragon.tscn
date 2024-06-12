@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://djwnv33bxfgae"]
+
+[ext_resource type="Script" path="res://entities/dragon/dragon.gd" id="1_bvune"]
+[ext_resource type="PackedScene" uid="uid://vms0nvlbrjdd" path="res://entities/dragon/fireball/fireball.tscn" id="2_n6sv8"]
+[ext_resource type="Texture2D" uid="uid://bvpspm3xiaw5k" path="res://assets/dragon/dragon_head.png" id="3_d4c3o"]
+[ext_resource type="AudioStream" uid="uid://41d36vxnpmts" path="res://assets/audio/roar.mp3" id="3_i57b5"]
+[ext_resource type="AudioStream" uid="uid://djprhrpkc8ijp" path="res://assets/audio/fireball.mp3" id="4_g6m3q"]
+[ext_resource type="Texture2D" uid="uid://c5ww5aaxtgs3e" path="res://assets/dragon/dragon_body.png" id="4_qnj8x"]
+[ext_resource type="Texture2D" uid="uid://b6ofp07njktif" path="res://assets/dragon/wing.png" id="5_e5vtv"]
+[ext_resource type="Script" path="res://entities/dragon/FrontWing.gd" id="6_n4ye7"]
+[ext_resource type="AudioStream" uid="uid://cp6mc8cqcoano" path="res://assets/audio/flap.mp3" id="7_cbwgj"]
+[ext_resource type="PackedScene" uid="uid://bdf4b57ka6cxf" path="res://components/plateformer/floater/floater_component.tscn" id="7_ihpvp"]
+[ext_resource type="PackedScene" uid="uid://1hbny108kx7j" path="res://components/plateformer/target_selector/target_selector_component.tscn" id="8_ed227"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdfkf"]
+radius = 50.0
+height = 200.0
+
+[node name="Dragon" type="CharacterBody2D" node_paths=PackedStringArray("floater_component", "target_selector")]
+z_index = 5
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_bvune")
+floater_component = NodePath("FloaterComponent")
+target_selector = NodePath("TargetSelectorComponent")
+fireball_scene = ExtResource("2_n6sv8")
+
+[node name="RoarSound" type="AudioStreamPlayer2D" parent="."]
+rotation = -3.02466
+scale = Vector2(1, 1)
+stream = ExtResource("3_i57b5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mdfkf")
+
+[node name="Head" type="Node2D" parent="."]
+rotation = -3.02466
+
+[node name="FireballFactory" type="Marker2D" parent="Head"]
+z_index = 70
+position = Vector2(61.4629, -25.344)
+rotation = 3.02466
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Head"]
+z_index = 1
+position = Vector2(-50, 0)
+texture = ExtResource("3_d4c3o")
+flip_v = true
+
+[node name="FireballSound" type="AudioStreamPlayer2D" parent="Head"]
+stream = ExtResource("4_g6m3q")
+
+[node name="Body" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(25, -50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+position = Vector2(61, 143)
+texture = ExtResource("4_qnj8x")
+flip_h = true
+
+[node name="FrontWing" type="Node2D" parent="."]
+z_index = 2
+position = Vector2(60, 130)
+rotation = 0.349066
+script = ExtResource("6_n4ye7")
+flap_speed = 1.6
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontWing"]
+position = Vector2(21, -47)
+skew = -0.328122
+texture = ExtResource("5_e5vtv")
+
+[node name="FlapSound" type="AudioStreamPlayer2D" parent="FrontWing"]
+stream = ExtResource("7_cbwgj")
+
+[node name="FloaterComponent" parent="." instance=ExtResource("7_ihpvp")]
+speed = 100.0
+target_tolerance = 50.0
+snap_target = false
+
+[node name="TargetSelectorComponent" parent="." instance=ExtResource("8_ed227")]
+distance_min = 150.0
+position_min = Vector2(640, 10)
+position_max = Vector2(1250, 710)
