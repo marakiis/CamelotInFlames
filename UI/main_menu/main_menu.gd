@@ -7,7 +7,7 @@ extends Control
 @onready var exit_button = $MainMenu/HBoxContainer/VBoxContainer/Quit
 
 func _ready():
-	Global.easy_mode = false
+	Global.hard_mode = false
 	main_menu.visible = true
 	instructions.visible = false
 	start_button.button_down.connect(on_start_pressed)
@@ -29,7 +29,7 @@ func on_exit_pressed():
 	get_tree().quit()
 
 func _on_check_button_toggled(toggled_on):
-	Global.easy_mode = toggled_on
+	Global.hard_mode = toggled_on
 
 @onready var scenario_1 = $Instructions/MarginContainer/Scenario1
 @onready var scenario_2 = $Instructions/MarginContainer/Scenario2

@@ -15,7 +15,7 @@ func _ready():
 	
 	score_label.text = "Your Score: %d" % int(Global.player_score)
 	high_score_label.text = "High Score: %d" % int(Global.high_score)
-	high_score_easy_mode_label.text = "High Score (Easy Mode): %d" % int(Global.high_score_easy_mode)
+	high_score_easy_mode_label.text = "High Score (Hard Mode): %d" % int(Global.high_score_hard_mode)
 
 func on_retry_pressed():
 	Global.switch_to_game()
