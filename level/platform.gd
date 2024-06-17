@@ -55,7 +55,7 @@ func _physics_process(delta):
 func update_next_position(next:Vector2) -> void:
 	target_position = next
 	# Activate NextPosition detection
-	if Global.easy_mode:
+	if not Global.hard_mode:
 		$NextPosition/CollisionShape2D.disabled = false
 	return
 
